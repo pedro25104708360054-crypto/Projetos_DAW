@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Aluno</title>
+</head>
+<body>
+    <h2>Novo Cadastro de Aluno</h2>
+    <form action="salvar.php" method="POST">
+        <label>Matrícula:</label><br>
+        <input type="text" name="matricula" required><br><br>
+
+        <label>Nome:</label><br>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <button type="submit">Salvar Aluno</button>
+        <a href="listar.php">Voltar</a>
+    </form>
+</body>
+</html>
