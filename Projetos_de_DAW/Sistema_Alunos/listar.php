@@ -31,6 +31,9 @@
                         echo "<td>" . htmlspecialchars($colunaDados[2]) . "</td>";
                         echo "<td>
                                 <a href='editar.php?matricula=" . urlencode($colunaDados[0]) . "'>Editar</a>
+                                <a href='excluir.php?matricula=" . urlencode($colunaDados[0]) . "' 
+           onclick=\"return confirm('Tem certeza que deseja excluir este aluno?')\" 
+           style='color:red;'>Excluir</a>
                               </td>";
                         echo "</tr>";
                     }
