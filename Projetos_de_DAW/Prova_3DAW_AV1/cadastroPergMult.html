@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Perguntas Multiplas</title>
+</head>
+<body>
+    <h2>Novo Cadastro de perguntas multiplas</h2>
+    <form action="salvarPergMult.php" method="POST">
+
+        <label>ID multiplo:</label><br>
+        <input type="text" name="IDmultiplo" required><br><br>
+
+        <label>Pergunta:</label><br>
+        <input type="text" name="PerguntaMultipla" required><br><br>
+
+        <label>Resposta A:</label><br>
+        <input type="text" name="respostaA" required><br><br>
+
+        <label>Resposta B:</label><br>
+        <input type="text" name="respostaB" required><br><br>
+
+        <label>Resposta C:</label><br>
+        <input type="text" name="respostaC" required><br><br>
+
+        <label>Resposta D:</label><br>
+        <input type="text" name="respostaD" required><br><br>
+
+        <label>Resposta Correta:</label><br>
+        <input type="text" name="respostaCerta" required><br><br>
+
+        
+
+        <button type="submit">Salvar Criação</button>
+        <a href="ListarPergMult.php">Voltar para lista</a>
+    </form>
+</body>
+</html>

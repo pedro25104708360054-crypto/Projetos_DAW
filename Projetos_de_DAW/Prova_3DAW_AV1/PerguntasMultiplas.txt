@@ -1,0 +1,10 @@
+Idade;
+Idade;
+Idade;
+Idade;;;;;
+Idade;;;;;
+Idade;12;23;34;45;
+Idade;12;23;34;45;
+Idade;12;23;34;45;
+add;21;23;232;34;B
+12;aaaa;4;5;6;7;A

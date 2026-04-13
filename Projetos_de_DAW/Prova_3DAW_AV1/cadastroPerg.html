@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Pergunta</title>
+</head>
+<body>
+    <h2>Novo Cadastro de pergunta</h2>
+    <form action="salvarPerg.php" method="POST">
+        <label>ID unica:</label><br>
+        <input type="text" name="IDunico" required><br><br>
+
+        <label>Pergunta:</label><br>
+        <input type="text" name="PerguntaUnica" required><br><br>
+
+        <label>Resposta:</label><br>
+        <input type="text" name="Resposta" ><br><br>
+
+        <button type="submit">Salvar Criação</button>
+        <a href="ListarPerg.php">Voltar para lista</a>
+    </form>
+</body>
+</html>
