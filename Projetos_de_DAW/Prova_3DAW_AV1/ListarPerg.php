@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista Respostas Unicas</title>
-    <style>
-        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 10px; }
-        th { background-color: #eee; }
-        .btn-add { display: inline-block; margin-bottom: 15px; text-decoration: none; color: green; font-weight: bold; }
-    </style>
+    
 </head>
 <body>
     <h1>Listar Resposta</h1>
@@ -24,7 +20,7 @@
                 if (!empty($linha)) {
                     $colunaDados = explode(";", $linha);
 
-                    if (count($colunaDados) >= 2) {
+                    if (count($colunaDados) >= 3) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($colunaDados[0]) . "</td>";
                         echo "<td>" . htmlspecialchars($colunaDados[1]) . "</td>";
@@ -43,5 +39,10 @@
         }
         ?>
     </table>
+
+    <a href="MenuPrincipal.html" >
+        ⬅ Voltar para Seleção de Tipo (Menu)
+    </a>
+
 </body>
 </html>
