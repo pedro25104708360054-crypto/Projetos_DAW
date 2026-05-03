@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora JS + PHP API</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .controles { margin-top: 10px; }
+        #res { margin-top: 20px; font-weight: bold; color: blue; }
+    </style>
+</head>
+<body>
+
+    <h1>Calculadora HTTP (Fetch API)</h1>
+
+    Valor A: <input type="number" id="valA"><br>
+    Valor B: <input type="number" id="valB"><br><br>
+
+    <div class="controles">
+        <button onclick="calcular('somar')">Somar</button>
+        <button onclick="calcular('subtrair')">Subtrair</button>
+        <button onclick="calcular('multiplicar')">Multiplicar</button>
+        <button onclick="calcular('dividir')">Dividir</button>
+        <button onclick="calcular('potencia')">A elevado a B</button>
+        <button onclick="calcular('raiz')">Raiz de A</button>
+    </div>
+
+    <div id="res"></div>
+
+    <script>
+        async function calcular(operacao) {
+            const a = document.getElementById('valA').value;
+            const b = document.getElementById('valB').value;
+            const display = document.getElementById('res');
+
+            display.innerText = "Calculando...";
+
+            try {
+                const resposta = await fetch('api.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ a, b, operacao })
+                });
+
+                const dados = await resposta.json();
+                display.innerText = "Resultado: " + dados.resultado;
+            } catch (erro) {
+                display.innerText = "Erro ao conectar com o servidor.";
+                console.error(erro);
+            }
+        }
+    </script>
+</body>
+</html>
