@@ -2,19 +2,15 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora JS + PHP API</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; }
-        .controles { margin-top: 10px; }
-        #res { margin-top: 20px; font-weight: bold; color: blue; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Client-Side (Apenas JS)</title>
 </head>
 <body>
 
-    <h1>Calculadora HTTP (Fetch API)</h1>
+    <h1>Calculadora Local (JavaScript)</h1>
 
-    Valor A: <input type="number" id="valA"><br>
-    Valor B: <input type="number" id="valB"><br><br>
+    Valor A: <input type="number" id="valA" placeholder="Ex: 10"><br><br>
+    Valor B: <input type="number" id="valB" placeholder="Ex: 2"><br><br>
 
     <div class="controles">
         <button onclick="calcular('somar')">Somar</button>
@@ -25,29 +21,45 @@
         <button onclick="calcular('raiz')">Raiz de A</button>
     </div>
 
-    <div id="res"></div>
+    <div id="res">Resultado: </div>
 
     <script>
-        async function calcular(operacao) {
-            const a = document.getElementById('valA').value;
-            const b = document.getElementById('valB').value;
+        function calcular(operacao) {
+            const a = parseFloat(document.getElementById('valA').value);
+            const b = parseFloat(document.getElementById('valB').value);
             const display = document.getElementById('res');
 
-            display.innerText = "Calculando...";
-
-            try {
-                const resposta = await fetch('api.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ a, b, operacao })
-                });
-
-                const dados = await resposta.json();
-                display.innerText = "Resultado: " + dados.resultado;
-            } catch (erro) {
-                display.innerText = "Erro ao conectar com o servidor.";
-                console.error(erro);
+            if (isNaN(a) && operacao !== 'raiz') {
+                display.innerText = "Por favor, digite os números.";
+                return;
             }
+
+            let resultado;
+
+            switch (operacao) {
+                case 'somar':
+                    resultado = a + b;
+                    break;
+                case 'subtrair':
+                    resultado = a - b;
+                    break;
+                case 'multiplicar':
+                    resultado = a * b;
+                    break;
+                case 'dividir':
+                    resultado = (b !== 0) ? (a / b) : "Erro: divisão por zero!";
+                    break;
+                case 'potencia':
+                    resultado = Math.pow(a, b);
+                    break;
+                case 'raiz':
+                    resultado = (a >= 0) ? Math.sqrt(a) : "Erro: Raiz de número negativo!";
+                    break;
+                default:
+                    resultado = "Operação inválida";
+            }
+
+            display.innerText = "Resultado: " + resultado;
         }
     </script>
 </body>
