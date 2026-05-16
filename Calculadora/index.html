@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Client-Side (Apenas JS)</title>
+</head>
+<body>
+
+    <h1>Calculadora Local (JavaScript)</h1>
+
+    Valor A: <input type="number" id="valA" placeholder="Ex: 10"><br><br>
+    Valor B: <input type="number" id="valB" placeholder="Ex: 2"><br><br>
+
+    <div class="controles">
+        <button onclick="calcular('somar')">Somar</button>
+        <button onclick="calcular('subtrair')">Subtrair</button>
+        <button onclick="calcular('multiplicar')">Multiplicar</button>
+        <button onclick="calcular('dividir')">Dividir</button>
+        <button onclick="calcular('potencia')">A elevado a B</button>
+        <button onclick="calcular('raiz')">Raiz de A</button>
+    </div>
+
+    <div id="res">Resultado: </div>
+
+    <script>
+        function calcular(operacao) {
+            const a = parseFloat(document.getElementById('valA').value);
+            const b = parseFloat(document.getElementById('valB').value);
+            const display = document.getElementById('res');
+
+            if (isNaN(a) && operacao !== 'raiz') {
+                display.innerText = "Por favor, digite os números.";
+                return;
+            }
+
+            let resultado;
+
+            switch (operacao) {
+                case 'somar':
+                    resultado = a + b;
+                    break;
+                case 'subtrair':
+                    resultado = a - b;
+                    break;
+                case 'multiplicar':
+                    resultado = a * b;
+                    break;
+                case 'dividir':
+                    resultado = (b !== 0) ? (a / b) : "Erro: divisão por zero!";
+                    break;
+                case 'potencia':
+                    resultado = Math.pow(a, b);
+                    break;
+                case 'raiz':
+                    resultado = (a >= 0) ? Math.sqrt(a) : "Erro: Raiz de número negativo!";
+                    break;
+                default:
+                    resultado = "Operação inválida";
+            }
+
+            display.innerText = "Resultado: " + resultado;
+        }
+    </script>
+</body>
+</html>
