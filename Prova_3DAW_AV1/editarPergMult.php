@@ -53,5 +53,6 @@ if (!$dadosEncontrados) { echo "Registro não encontrado."; exit; }
         <button type="submit">Salvar Alterações</button>
         <a href="ListarPergMult.php">Cancelar</a>
     </form>
+    <script src="validacoes.js"></script>
 </body>
 </html>

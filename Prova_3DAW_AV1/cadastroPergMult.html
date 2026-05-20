@@ -34,5 +34,23 @@
         <button type="submit">Salvar Criação</button>
         <a href="ListarPergMult.php">Voltar para lista</a>
     </form>
+    <script src="validacoes.js"></script>
 </body>
 </html>
+
+<script>
+  document.querySelector('form[action="salvarPergMult.php"]').addEventListener('submit', function(e) {
+    const respA = document.getElementsByName('respostaA')[0].value;
+    const respB = document.getElementsByName('respostaB')[0].value;
+    const respC = document.getElementsByName('respostaC')[0].value;
+    const respD = document.getElementsByName('respostaD')[0].value;
+    const certa = document.getElementsByName('respostaCerta')[0].value;
+
+    const opcoes = [respA, respB, respC, respD];
+
+    if (!opcoes.includes(certa)) {
+        alert("A 'Resposta Correta' deve ser exatamente igual a uma das opções (A, B, C ou D).");
+        e.preventDefault();
+    }
+});
+</script>

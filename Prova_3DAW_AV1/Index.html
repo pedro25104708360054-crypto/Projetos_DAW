@@ -15,5 +15,21 @@
 
         <button type="submit">Salvar Usuario</button>
     </form>
+    <script src="validacoes.js"></script>
 </body>
 </html>
+
+<script>
+    document.querySelector('form[action="salvarUsuario.php"]').addEventListener('submit', function(e) {
+    const cpf = document.getElementsByName('CPF')[0].value.replace(/\D/g, ''); 
+    const nome = document.getElementsByName('nome')[0].value;
+
+    if (nome.length < 3) {
+        alert("Por favor, insira um nome completo.");
+        e.preventDefault();
+    } else if (cpf.length !== 11) {
+        alert("O CPF deve conter 11 dígitos numéricos.");
+        e.preventDefault();
+    }
+});
+</script>
