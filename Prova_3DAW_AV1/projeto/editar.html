@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pergunta Única</title>
+</head>
+<body>
+
+    <h2>Editar Pergunta Única</h2>
+
+    <a href="lista.html">Voltar para lista</a>
+    <br><br>
+
+    <form id="formEditar">
+        <input type="hidden" id="id">
+
+        <label>Pergunta:</label><br>
+        <input type="text" id="pergunta" required>
+        <br><br>
+
+        <label>Resposta:</label><br>
+        <input type="text" id="resposta" required>
+        <br><br>
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <script>
+        const parametros = new URLSearchParams(window.location.search);
+        const id = parametros.get("id");
+
+        document.getElementById("id").value = id;
+
+        async function carregarPergunta() {
+            try {
+                const res = await fetch("http://localhost/projeto/api/buscarPerg.php?id=" + id);
+                const dados = await res.json();
+
+                document.getElementById("pergunta").value = dados.pergunta;
+                document.getElementById("resposta").value = dados.resposta;
+
+            } catch (erro) {
+                alert("Erro ao carregar dados da pergunta.");
+                console.error(erro);
+            }
+        }
+
+        document.getElementById("formEditar").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const dados = {
+                id: document.getElementById("id").value,
+                pergunta: document.getElementById("pergunta").value,
+                resposta: document.getElementById("resposta").value
+            };
+
+            if (dados.pergunta.trim() === "") {
+                alert("A pergunta não pode ficar vazia.");
+                return;
+            }
+
+            if (dados.resposta.trim() === "") {
+                alert("A resposta não pode ficar vazia.");
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost/projeto/api/editarPerg.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                const resposta = await res.text();
+
+                alert(resposta);
+                window.location.href = "lista.html";
+
+            } catch (erro) {
+                alert("Erro ao editar pergunta.");
+                console.error(erro);
+            }
+        });
+
+        carregarPergunta();
+    </script>
+
+</body>
+</html>

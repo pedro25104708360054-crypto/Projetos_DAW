@@ -1,3 +1,0 @@
-Qual menu nome?;pedro
-Qual minha idade?;12 anos
-1;errado?;correto

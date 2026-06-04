@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Perguntas Únicas</title>
+</head>
+<body>
+
+    <h2>Lista de Perguntas Únicas</h2>
+
+    <a href="index.html">Voltar ao Menu</a>
+    <br><br>
+
+    <a href="cadastroPerg.html">+ Cadastrar nova pergunta única</a>
+    <br><br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pergunta</th>
+                <th>Resposta</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody id="tabela"></tbody>
+    </table>
+
+    <script>
+        async function carregarPerguntas() {
+            try {
+                const res = await fetch("http://localhost/projeto/api/listarPerg.php");
+                const dados = await res.json();
+
+                const tabela = document.getElementById("tabela");
+                tabela.innerHTML = "";
+
+                dados.forEach(p => {
+                    tabela.innerHTML += `
+                        <tr>
+                            <td>${p.id}</td>
+                            <td>${p.pergunta}</td>
+                            <td>${p.resposta}</td>
+                            <td>
+                                <button onclick="editarPergunta(${p.id})">Editar</button>
+                                <button onclick="excluirPergunta(${p.id})">Excluir</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+            } catch (erro) {
+                alert("Erro ao carregar perguntas.");
+                console.error(erro);
+            }
+        }
+
+        function editarPergunta(id) {
+            window.location.href = "editar.html?id=" + id;
+        }
+
+        async function excluirPergunta(id) {
+            const confirmar = confirm("Tem certeza que deseja excluir esta pergunta?");
+
+            if (!confirmar) {
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost/projeto/api/excluirPerg.php?id=" + id);
+                const resposta = await res.text();
+
+                alert(resposta);
+                carregarPerguntas();
+
+            } catch (erro) {
+                alert("Erro ao excluir pergunta.");
+                console.error(erro);
+            }
+        }
+
+        carregarPerguntas();
+    </script>
+
+</body>
+</html>

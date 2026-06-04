@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pergunta Múltipla</title>
+</head>
+<body>
+
+    <h2>Editar Pergunta Múltipla</h2>
+
+    <a href="listaMult.html">Voltar para lista</a>
+    <br><br>
+
+    <form id="formEditarMult">
+        <input type="hidden" id="id">
+
+        <label>Pergunta:</label><br>
+        <input type="text" id="pergunta" required>
+        <br><br>
+
+        <label>Resposta A:</label><br>
+        <input type="text" id="a" required>
+        <br><br>
+
+        <label>Resposta B:</label><br>
+        <input type="text" id="b" required>
+        <br><br>
+
+        <label>Resposta C:</label><br>
+        <input type="text" id="c" required>
+        <br><br>
+
+        <label>Resposta D:</label><br>
+        <input type="text" id="d" required>
+        <br><br>
+
+        <label>Resposta Correta:</label><br>
+        <input type="text" id="correta" required>
+        <br><br>
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <script>
+        const parametros = new URLSearchParams(window.location.search);
+        const id = parametros.get("id");
+
+        document.getElementById("id").value = id;
+
+        async function carregarPerguntaMultipla() {
+            try {
+                const res = await fetch("http://localhost/projeto/api/buscarPergMult.php?id=" + id);
+                const dados = await res.json();
+
+                document.getElementById("pergunta").value = dados.pergunta;
+                document.getElementById("a").value = dados.a;
+                document.getElementById("b").value = dados.b;
+                document.getElementById("c").value = dados.c;
+                document.getElementById("d").value = dados.d;
+                document.getElementById("correta").value = dados.correta;
+
+            } catch (erro) {
+                alert("Erro ao carregar dados da pergunta múltipla.");
+                console.error(erro);
+            }
+        }
+
+        document.getElementById("formEditarMult").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const dados = {
+                id: document.getElementById("id").value,
+                pergunta: document.getElementById("pergunta").value,
+                a: document.getElementById("a").value,
+                b: document.getElementById("b").value,
+                c: document.getElementById("c").value,
+                d: document.getElementById("d").value,
+                correta: document.getElementById("correta").value
+            };
+
+            if (dados.pergunta.trim() === "") {
+                alert("A pergunta não pode ficar vazia.");
+                return;
+            }
+
+            if (
+                dados.a.trim() === "" ||
+                dados.b.trim() === "" ||
+                dados.c.trim() === "" ||
+                dados.d.trim() === "" ||
+                dados.correta.trim() === ""
+            ) {
+                alert("Nenhuma resposta pode ficar vazia.");
+                return;
+            }
+
+            const opcoes = [
+                dados.a.trim(),
+                dados.b.trim(),
+                dados.c.trim(),
+                dados.d.trim()
+            ];
+
+            if (!opcoes.includes(dados.correta.trim())) {
+                alert("A resposta correta deve ser exatamente igual a uma das opções A, B, C ou D.");
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost/projeto/api/editarPergMult.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                const resposta = await res.text();
+
+                alert(resposta);
+                window.location.href = "listaMult.html";
+
+            } catch (erro) {
+                alert("Erro ao editar pergunta múltipla.");
+                console.error(erro);
+            }
+        });
+
+        carregarPerguntaMultipla();
+    </script>
+
+</body>
+</html>
