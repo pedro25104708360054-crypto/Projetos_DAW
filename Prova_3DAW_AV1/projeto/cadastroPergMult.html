@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
     <title>Pergunta Múltipla</title>
 </head>
 <body>
 
-<h2>Cadastrar Pergunta Múltipla</h2>
+    <h2>Cadastrar Pergunta Múltipla</h2>
 
-<form id="formMult">
-    <input type="text" name="IDmultiplo" placeholder="ID"><br>
-    <input type="text" name="PerguntaMultipla" placeholder="Pergunta"><br>
+    <a href="index.html">Voltar ao Menu</a>
+    <br><br>
 
-    <input type="text" name="A" placeholder="Resposta A"><br>
-    <input type="text" name="B" placeholder="Resposta B"><br>
-    <input type="text" name="C" placeholder="Resposta C"><br>
-    <input type="text" name="D" placeholder="Resposta D"><br>
+    <form id="formMult">
+        <input type="text" name="IDmultiplo" placeholder="ID" required><br>
+        <input type="text" name="PerguntaMultipla" placeholder="Pergunta" required><br>
 
-    <input type="text" name="correta" placeholder="Resposta correta"><br>
+        <input type="text" name="A" placeholder="Resposta A" required><br>
+        <input type="text" name="B" placeholder="Resposta B" required><br>
+        <input type="text" name="C" placeholder="Resposta C" required><br>
+        <input type="text" name="D" placeholder="Resposta D" required><br>
 
-    <button type="submit">Salvar</button>
+        <input type="text" name="correta" placeholder="Resposta correta" required><br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

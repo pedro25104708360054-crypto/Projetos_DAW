@@ -47,23 +47,34 @@
 
         document.getElementById("id").value = id;
 
-        async function carregarPerguntaMultipla() {
-            try {
-                const res = await fetch("http://localhost/projeto/api/buscarPergMult.php?id=" + id);
-                const dados = await res.json();
+        
+async function carregarPerguntaMultipla() {
+    try {
+        const res = await fetch("api/buscarPergMult.php?id=" + id);
+        const texto = await res.text();
 
-                document.getElementById("pergunta").value = dados.pergunta;
-                document.getElementById("a").value = dados.a;
-                document.getElementById("b").value = dados.b;
-                document.getElementById("c").value = dados.c;
-                document.getElementById("d").value = dados.d;
-                document.getElementById("correta").value = dados.correta;
+        console.log("Resposta da API buscarPergMult:", texto);
 
-            } catch (erro) {
-                alert("Erro ao carregar dados da pergunta múltipla.");
-                console.error(erro);
-            }
+        const dados = JSON.parse(texto);
+
+        if (dados.erro) {
+            alert(dados.erro);
+            return;
         }
+
+        document.getElementById("pergunta").value = dados.pergunta;
+        document.getElementById("a").value = dados.a;
+        document.getElementById("b").value = dados.b;
+        document.getElementById("c").value = dados.c;
+        document.getElementById("d").value = dados.d;
+        document.getElementById("correta").value = dados.correta;
+
+    } catch (erro) {
+        alert("Erro ao carregar dados da pergunta múltipla. Veja o console.");
+        console.error(erro);
+    }
+}
+
 
         document.getElementById("formEditarMult").addEventListener("submit", async function(e) {
             e.preventDefault();
@@ -107,7 +118,7 @@
             }
 
             try {
-                const res = await fetch("http://localhost/projeto/api/editarPergMult.php", {
+                const res = await fetch("api/editarPergMult.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

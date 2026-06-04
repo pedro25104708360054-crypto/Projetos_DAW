@@ -30,7 +30,12 @@
     <script>
         async function carregarPerguntas() {
             try {
-                const res = await fetch("http://localhost/projeto/api/listarPerg.php");
+                const res = await fetch("api/listarPerg.php");
+
+                if (!res.ok) {
+                    throw new Error("Erro HTTP: " + res.status);
+                }
+
                 const dados = await res.json();
 
                 const tabela = document.getElementById("tabela");
@@ -68,7 +73,7 @@
             }
 
             try {
-                const res = await fetch("http://localhost/projeto/api/excluirPerg.php?id=" + id);
+                const res = await fetch("api/excluirPerg.php?id=" + id);
                 const resposta = await res.text();
 
                 alert(resposta);

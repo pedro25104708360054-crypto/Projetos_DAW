@@ -33,7 +33,7 @@
 
         async function carregarPergunta() {
             try {
-                const res = await fetch("http://localhost/projeto/api/buscarPerg.php?id=" + id);
+                const res = await fetch("api/buscarPerg.php?id=" + id);
                 const dados = await res.json();
 
                 document.getElementById("pergunta").value = dados.pergunta;
@@ -65,7 +65,7 @@
             }
 
             try {
-                const res = await fetch("http://localhost/projeto/api/editarPerg.php", {
+                const res = await fetch("api/editarPerg.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

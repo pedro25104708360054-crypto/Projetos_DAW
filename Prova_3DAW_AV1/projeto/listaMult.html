@@ -2,16 +2,16 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Perguntas Únicas</title>
+    <title>Lista de Perguntas Múltiplas</title>
 </head>
 <body>
 
-    <h2>Lista de Perguntas Únicas</h2>
+    <h2>Lista de Perguntas Múltiplas</h2>
 
     <a href="index.html">Voltar ao Menu</a>
     <br><br>
 
-    <a href="cadastroPerg.html">+ Cadastrar nova pergunta única</a>
+    <a href="cadastroPergMult.html">+ Cadastrar nova pergunta múltipla</a>
     <br><br>
 
     <table border="1">
@@ -19,7 +19,11 @@
             <tr>
                 <th>ID</th>
                 <th>Pergunta</th>
-                <th>Resposta</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>Correta</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -28,9 +32,14 @@
     </table>
 
     <script>
-        async function carregarPerguntas() {
+        async function carregarPerguntasMultiplas() {
             try {
-                const res = await fetch("http://localhost/projeto/api/listarPerg.php");
+                const res = await fetch("api/listarPergMult.php");
+
+                if (!res.ok) {
+                    throw new Error("Erro HTTP: " + res.status);
+                }
+
                 const dados = await res.json();
 
                 const tabela = document.getElementById("tabela");
@@ -41,46 +50,50 @@
                         <tr>
                             <td>${p.id}</td>
                             <td>${p.pergunta}</td>
-                            <td>${p.resposta}</td>
+                            <td>${p.a}</td>
+                            <td>${p.b}</td>
+                            <td>${p.c}</td>
+                            <td>${p.d}</td>
+                            <td>${p.correta}</td>
                             <td>
-                                <button onclick="editarPergunta(${p.id})">Editar</button>
-                                <button onclick="excluirPergunta(${p.id})">Excluir</button>
+                                <button onclick="editarPerguntaMultipla(${p.id})">Editar</button>
+                                <button onclick="excluirPerguntaMultipla(${p.id})">Excluir</button>
                             </td>
                         </tr>
                     `;
                 });
 
             } catch (erro) {
-                alert("Erro ao carregar perguntas.");
+                alert("Erro ao carregar perguntas múltiplas.");
                 console.error(erro);
             }
         }
 
-        function editarPergunta(id) {
-            window.location.href = "editar.html?id=" + id;
+        function editarPerguntaMultipla(id) {
+            window.location.href = "editarMult.html?id=" + id;
         }
 
-        async function excluirPergunta(id) {
-            const confirmar = confirm("Tem certeza que deseja excluir esta pergunta?");
+        async function excluirPerguntaMultipla(id) {
+            const confirmar = confirm("Tem certeza que deseja excluir esta pergunta múltipla?");
 
             if (!confirmar) {
                 return;
             }
 
             try {
-                const res = await fetch("http://localhost/projeto/api/excluirPerg.php?id=" + id);
+                const res = await fetch("api/excluirPergMult.php?id=" + id);
                 const resposta = await res.text();
 
                 alert(resposta);
-                carregarPerguntas();
+                carregarPerguntasMultiplas();
 
             } catch (erro) {
-                alert("Erro ao excluir pergunta.");
+                alert("Erro ao excluir pergunta múltipla.");
                 console.error(erro);
             }
         }
 
-        carregarPerguntas();
+        carregarPerguntasMultiplas();
     </script>
 
 </body>

@@ -1,23 +1,20 @@
 <?php
-$idExcluir = $_GET['IDmultiplo'] ?? null;
-$caminho = "PerguntasMultiplas.txt";
+include("conexao.php");
 
-if ($idExcluir && file_exists($caminho)) {
+$id = $_GET["id"] ?? null;
 
-    $linhas = file($caminho);
-    $novo = [];
-
-    foreach ($linhas as $linha) {
-        $dados = explode(";", trim($linha));
-
-        if ($dados[0] != $idExcluir) {
-            $novo[] = $linha;
-        }
-    }
-
-    file_put_contents($caminho, implode("", $novo));
+if (!$id) {
+    echo "ID não informado.";
+    exit;
 }
 
-header("Location: ListarPergMult.php");
-exit;
+$sql = "DELETE FROM perguntas_multiplas WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+
+if ($stmt->execute()) {
+    echo "Excluído com sucesso";
+} else {
+    echo "Erro ao excluir: " . $stmt->error;
+}
 ?>

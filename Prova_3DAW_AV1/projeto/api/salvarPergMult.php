@@ -3,10 +3,20 @@ include("conexao.php");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
+if (!$data) {
+    echo "Erro: nenhum dado recebido.";
+    exit;
+}
+
 $sql = "INSERT INTO perguntas_multiplas (id, pergunta, a, b, c, d, correta)
         VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo "Erro no prepare: " . $conn->error;
+    exit;
+}
 
 $stmt->bind_param(
     "issssss",
@@ -22,6 +32,6 @@ $stmt->bind_param(
 if ($stmt->execute()) {
     echo "Salvo com sucesso";
 } else {
-    echo "Erro ao salvar: " . $conn->error;
+    echo "Erro ao salvar: " . $stmt->error;
 }
 ?>
