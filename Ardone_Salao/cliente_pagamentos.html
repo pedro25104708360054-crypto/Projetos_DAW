@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamentos</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="client-body">
+    <header class="client-header">
+        <a href="cliente_area.html" class="logo">✿ Ardone</a>
+        <nav>
+            <a href="cliente_area.html">Agendar</a>
+            <a href="cliente_pagamentos.html">Pagamentos</a>
+            <a href="#" id="sair">Sair</a>
+        </nav>
+    </header>
+
+    <main class="client-main">
+        <div id="mensagem"></div>
+
+        <section class="panel">
+            <h2>Meus pagamentos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serviço</th>
+                        <th>Valor</th>
+                        <th>Forma</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="assets/js/cliente_pagamentos.js"></script>
+</body>
+</html>

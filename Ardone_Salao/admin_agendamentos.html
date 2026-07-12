@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="admin-body">
+
+<aside class="sidebar">
+    <h1>Ardone</h1>
+    <a href="admin_dashboard.html">Início</a>
+    <a href="admin_clientes.html">Clientes</a>
+    <a href="admin_funcionarios.html">Funcionários</a>
+    <a href="admin_servicos.html">Serviços</a>
+    <a href="admin_agendamentos.html">Agendamentos</a>
+    <a href="admin_pagamentos.html">Pagamentos</a>
+    <a href="#" id="sair">Sair</a>
+</aside>
+
+    <main class="admin-main">
+        <header class="admin-top">
+            <span>Agendamentos</span>
+            <strong id="nomeAdmin">Administrador</strong>
+        </header>
+        <div id="mensagem"></div>
+
+        <section class="panel form-panel">
+            <h2>Agendamento</h2>
+            <form id="formAgendamento" class="form-grid">
+                <input type="hidden" name="id" id="id">
+
+                <label>Cliente</label>
+                <select name="cliente_id" id="cliente_id" required></select>
+
+                <label>Serviço</label>
+                <select name="servico_id" id="servico_id" required></select>
+
+                <label>Funcionário</label>
+                <select name="funcionario_id" id="funcionario_id" required>
+                    <option value="">Escolha o serviço</option>
+                </select>
+
+                <label>Data</label>
+                <input type="date" name="data_agendamento" id="data_agendamento" required>
+
+                <label>Hora</label>
+                <input type="time" name="hora_agendamento" id="hora_agendamento" required>
+
+                <label>Status</label>
+                <select name="status" id="status">
+                    <option>Agendado</option>
+                    <option>Confirmado</option>
+                    <option>Finalizado</option>
+                    <option>Cancelado</option>
+                </select>
+
+                <label>Observação</label>
+                <textarea name="observacao" id="observacao"></textarea>
+
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" id="limpar">Limpar</button>
+                    <button class="btn primary">Salvar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Lista</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Funcionário</th>
+                        <th>Serviço</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela"></tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script src="assets/js/admin_agendamentos.js"></script>
+</body>
+</html>

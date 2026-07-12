@@ -1,8 +1,0 @@
-Observações do desenvolvimento
-
-Este sistema foi desenvolvido em PHP puro e MySQL, sem framework, para manter a proposta simples e próxima do conteúdo praticado em aula.
-
-A estrutura foi separada em pastas para facilitar a manutenção:
-config, includes, views, actions, api e assets.
-
-A principal regra do agendamento é impedir que o mesmo funcionário tenha dois horários marcados na mesma data e hora.

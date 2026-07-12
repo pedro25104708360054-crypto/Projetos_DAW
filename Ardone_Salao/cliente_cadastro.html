@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro cliente</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="login-body">
+    <main class="login-card">
+        <h1>Criar conta</h1>
+        <div id="mensagem"></div>
+
+        <form id="formCadastro" class="form-stack">
+            <input type="hidden" name="acao" value="cadastrar">
+
+            <label>Nome</label>
+            <input name="nome" required>
+
+            <label>E-mail</label>
+            <input type="email" name="email" required>
+
+            <label>Telefone</label>
+            <input name="telefone" id="telefone" required>
+
+            <label>Senha</label>
+            <input type="password" name="senha" minlength="6" required>
+
+            <button class="btn primary">Cadastrar</button>
+        </form>
+
+        <a href="cliente_login.html" class="back-link">Já tenho conta</a>
+    </main>
+
+    <script src="assets/js/cliente_cadastro.js"></script>
+</body>
+</html>

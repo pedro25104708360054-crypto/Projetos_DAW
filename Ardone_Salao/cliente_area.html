@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do cliente</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="client-body">
+    <header class="client-header">
+        <a href="cliente_area.html" class="logo">✿ Ardone</a>
+        <nav>
+            <a href="cliente_area.html">Agendar</a>
+            <a href="cliente_pagamentos.html">Pagamentos</a>
+            <a href="#" id="sair">Sair</a>
+        </nav>
+    </header>
+
+    <main class="client-main">
+        <div id="mensagem"></div>
+
+        <section class="panel form-panel">
+            <h2>Marcar horário</h2>
+            <form id="formAgendamento" class="form-grid">
+                <label>Serviço</label>
+                <select name="servico_id" id="servico_id" required></select>
+
+                <label>Funcionário</label>
+                <select name="funcionario_id" id="funcionario_id" required>
+                    <option value="">Escolha o serviço</option>
+                </select>
+
+                <label>Data</label>
+                <input type="date" name="data_agendamento" required>
+
+                <label>Hora</label>
+                <input type="time" name="hora_agendamento" required>
+
+                <label>Pagamento</label>
+                <select name="forma_pagamento" id="forma_pagamento" required>
+                    <option>Dinheiro</option>
+                    <option>Pix</option>
+                    <option>Cartão de débito</option>
+                    <option>Cartão de crédito</option>
+                </select>
+
+                <div id="dadosCartao" class="card-box" style="display: none;">
+                    <label>Nome no cartão</label>
+                    <input name="nome_cartao" id="nome_cartao">
+
+                    <label>Número do cartão</label>
+                    <input name="numero_cartao" id="numero_cartao" maxlength="19" placeholder="0000 0000 0000 0000">
+
+                    <label>Validade</label>
+                    <input name="validade_cartao" id="validade_cartao" maxlength="7" placeholder="MM/AAAA">
+
+                    <label>CVV</label>
+                    <input name="cvv_cartao" id="cvv_cartao" maxlength="4">
+                </div>
+
+                <div id="areaPix" class="pix-box" style="display: none;">
+                    <label>Pague com Pix</label>
+                    <div class="pix-conteudo">
+                        <img id="qrPix" alt="QR Code Pix" width="160" height="160">
+                        <div class="pix-chave">
+                            <span>Ou copie a chave abaixo</span>
+                            <div class="pix-copia">
+                                <input type="text" id="chavePix" value="contato@ardonesalao.com.br" readonly>
+                                <button type="button" id="copiarPix" class="btn secondary">Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label>Observação</label>
+                <textarea name="observacao"></textarea>
+
+                <div class="form-actions">
+                    <button class="btn primary">Agendar e pagar</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Meus agendamentos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serviço</th>
+                        <th>Funcionário</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="assets/js/cliente_area.js"></script>
+</body>
+</html>
